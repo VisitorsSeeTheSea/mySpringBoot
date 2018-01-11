@@ -25,12 +25,6 @@ public class MySpringBootApplicationTests {
         Destination destination = new ActiveMQQueue("mytest.queue");
         Destination topic = new ActiveMQTopic("mytest.topic");
 
-
-
-
-
-
-
         for (int i = 0; i < 10; i++) {
 
             producer.sendMessage(destination, "发送queue消息" + i);
