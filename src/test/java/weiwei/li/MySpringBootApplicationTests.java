@@ -7,6 +7,8 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import weiwei.li.model.Book;
+import weiwei.li.mongodb.impl.MongodbServiceImpl;
 import weiwei.li.mq.Producer;
 
 import javax.jms.Destination;
@@ -18,6 +20,9 @@ public class MySpringBootApplicationTests {
 
     @Autowired
     private Producer producer;
+    @Autowired
+    private MongodbServiceImpl mongodbServiceImpl;
+
 
     @Test
     public void contextLoads() {
@@ -31,5 +36,16 @@ public class MySpringBootApplicationTests {
             producer.sendMessage(topic, "发送topic消息" + i);
 
         }
+    }
+
+    @Test
+    public void testMongodb() {
+        Book book = new Book();
+        book.setId(1090L);
+        book.setAuthor("hah");
+        book.setReader("reader");
+        book.setDescription("mongodb插入数据");
+        mongodbServiceImpl.insertBook(book);
+
     }
 }
