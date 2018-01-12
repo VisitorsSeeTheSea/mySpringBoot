@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import weiwei.li.dao.ReadingListRepository;
 import weiwei.li.model.Book;
+import weiwei.li.mongodb.impl.MongodbServiceImpl;
 
 import java.util.List;
 
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/")
 public class ReadingListController {
     private ReadingListRepository readingListRepository;
+
 
     @Autowired
     public ReadingListController(
@@ -44,9 +46,9 @@ public class ReadingListController {
         Book book = new Book();
         book.setReader("1");
         try {
-        readingListRepository.save(book);
-        }catch (Exception e){
-            System.out.println("yichang"+e);
+            readingListRepository.save(book);
+        } catch (Exception e) {
+            System.out.println("yichang" + e);
         }
         return "save";
     }

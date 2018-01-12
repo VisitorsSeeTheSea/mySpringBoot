@@ -12,9 +12,15 @@ import weiwei.li.mongodb.impl.MongodbServiceImpl;
 import weiwei.li.mq.Producer;
 
 import javax.jms.Destination;
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.Random;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest
+@SpringBootTest(classes = MySpringBootApplication.class)
 public class MySpringBootApplicationTests {
 
 
@@ -48,4 +54,37 @@ public class MySpringBootApplicationTests {
         mongodbServiceImpl.insertBook(book);
 
     }
+
+    @Test
+    public void file() {
+        try {
+            //1.输入流读取文件
+            FileReader fr = new FileReader("/Users/weiwei.li/Desktop/data.txt");
+            BufferedReader br = new BufferedReader(fr);
+            String line = "";
+            ArrayList<String> arrayList = new ArrayList();
+            //2.一行一行读取文件内容 存入到list中
+            while ((line = br.readLine()) != null) {
+                arrayList.add(line);
+            }
+
+
+            //3.随机从集合中获取一个
+            Random r = new Random();
+            int index = r.nextInt(4);
+
+            String language = arrayList.get(index);
+            System.out.println("年度最受欢迎的语言是：" + language);
+
+
+            br.close();
+            fr.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
