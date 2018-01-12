@@ -41,7 +41,7 @@ public class MySpringBootApplicationTests {
     @Test
     public void testMongodb() {
         Book book = new Book();
-        book.setId(1090L);
+        book.setId(1098L);
         book.setAuthor("hah");
         book.setReader("reader");
         book.setDescription("mongodb插入数据");
